@@ -3,9 +3,24 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+Route::get('home', function () {
     return view('welcome');
 });
+Route::get('/', function(){
+    return view('home');
+})->name('home');
+
+Route::get('/FAQ', function(){
+    return view('faq');
+})->name('faq');
+
+Route::get('/Contact', function(){
+    return view('contact');
+})->name('contact');
+
+Route::get('/News', function(){
+    return view('news');
+})->name('news');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
