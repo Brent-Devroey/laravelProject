@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Storage;
+use App\Models\User;
 
 
 class ProfileController extends Controller
@@ -71,11 +72,8 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
-    public function show()
+    public function show(User $user): View
     {
-        // Get the authenticated user
-        $user = Auth::user();
-        
-        return view('profile', compact('user'));
+        return view('profile', ['user' => $user]);
     }
 }

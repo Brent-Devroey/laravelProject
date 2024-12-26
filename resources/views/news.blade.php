@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News</title>
-    @vite('resources/css/app.css')
-</head>
-<body>
-    <x-navbar/>
-</body>
-</html>
+<x-app-layout>
+    @section('title', 'Your Profile')
+
+</x-app-layout>
