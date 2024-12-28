@@ -50,5 +50,9 @@ Route::delete('/books/{book}', [BookController::class, 'destroy'])->name('books.
 
 Route::get('/user/{user}', [BookController::class, 'showProfile'])->name('profile.show');
 
+Route::middleware('admin')->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+});
+
 
 require __DIR__.'/auth.php';
