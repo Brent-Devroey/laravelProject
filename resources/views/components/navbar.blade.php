@@ -16,6 +16,11 @@
                 <li>
                     <a href="{{ route('profile.show', auth()->user()->id) }}" class="text-white hover:text-gray-300">Profile</a>
                 </li>
+                @if(auth()->user()->is_admin)
+                    <li>
+                        <a href="{{ route('admin.dashboard') }}" class="text-white hover:text-gray-300">Admin Dashboard</a>
+                    </li>
+                @endif
                 <li>
                     <form action="{{ route('logout') }}" method="POST" aria-label="Logout">
                         @csrf

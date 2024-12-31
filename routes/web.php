@@ -2,6 +2,11 @@
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Admin\AdminUsersController;
+use App\Http\Controllers\Admin\AdminNewsController;
+use App\Http\Controllers\Admin\AdminFAQController;
+use App\Http\Controllers\Admin\AdminContactController;
+use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 
@@ -50,8 +55,29 @@ Route::delete('/books/{book}', [BookController::class, 'destroy'])->name('books.
 
 Route::get('/user/{user}', [BookController::class, 'showProfile'])->name('profile.show');
 
-Route::middleware('admin')->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+Route::middleware('auth')->group(function () {
+    Route::get('/admin/dashboard', function () {
+        if (auth()->user()->is_admin) {
+            return view('admin.dashboard');
+        }
+        return redirect('/')->with('error', 'Access denied.');
+    })->name('admin.dashboard');
+
+    Route::prefix('admin/users')->name('admin.users.')->group(function () {
+        Route::get('/', [AdminUsersController::class, 'index'])->name('index');
+    });
+
+    Route::prefix('admin/news')->name('admin.news.')->group(function () {
+        Route::get('/', [AdminNewsController::class, 'index'])->name('index');
+    });
+
+    Route::prefix('admin/faq')->name('admin.faq.')->group(function () {
+        Route::get('/', [AdminFAQController::class, 'index'])->name('index');
+    });
+
+    Route::prefix('admin/contacts')->name('admin.contacts.')->group(function () {
+        Route::get('/', [AdminContactController::class, 'index'])->name('index');
+    });
 });
 
 
