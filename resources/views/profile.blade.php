@@ -29,7 +29,7 @@
                 <div class="mt-6">
                     <h2 class="text-xl font-semibold">Most Recent Book</h2>
                     <div class="bg-white shadow-md rounded-lg p-4 mt-4">
-                        <img src="{{ asset('storage/' . $recentBook->image) }}" alt="{{ $recentBook->title }}" class="w-full h-48 object-cover rounded-md mb-4">
+                        <img src="{{ asset('storage/' . $recentBook->image) }}" alt="{{ $recentBook->title }}" class="w-auto h-48 object-cover rounded-md mb-4">
                         <h3 class="text-lg font-semibold">{{ $recentBook->title }}</h3>
                         <p class="text-sm text-gray-600">{{ $recentBook->description }}</p>
                         <p class="mt-2 font-bold">Rating: {{ $recentBook->rating }}/5</p>

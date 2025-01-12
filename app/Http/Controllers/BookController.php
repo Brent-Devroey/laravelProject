@@ -5,14 +5,14 @@ use Illuminate\Http\Request;
 use App\Models\Book;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
 
     public function index()
     {
-        $books = Book::where('user_id', auth()->id())->get();
+        $books = Book::where('user_id', Auth::id())->get();
 
         return view('home', compact('books'));
     }
@@ -37,7 +37,7 @@ class BookController extends Controller
             'description' => $validated['description'],
             'rating' => $validated['rating'],
             'image' => $imagePath,
-            'user_id' => auth()->id(),
+            'user_id' => Auth::id(),
         ]);
 
         return redirect()->route('home')->with('success', 'Book added successfully to your library!');

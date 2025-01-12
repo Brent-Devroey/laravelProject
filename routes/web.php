@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminFAQController;
 use App\Http\Controllers\Admin\AdminContactController;
 use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 
@@ -56,9 +57,11 @@ Route::delete('/books/{book}', [BookController::class, 'destroy'])->name('books.
 
 Route::get('/user/{user}', [BookController::class, 'showProfile'])->name('profile.show');
 
+Route::get('/news', [NewsController::class, 'index'])->name('news');
+
 Route::middleware('auth')->group(function () {
     Route::get('/admin/dashboard', function () {
-        if (auth()->user()->is_admin) {
+        if (Auth::user()->is_admin) {
             return view('admin.dashboard');
         }
         return redirect('/')->with('error', 'Access denied.');
@@ -74,6 +77,8 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('admin/news')->name('admin.news.')->group(function () {
         Route::get('/', [AdminNewsController::class, 'index'])->name('index');
+        Route::post('/', [AdminNewsController::class, 'store'])->name('store');
+        Route::delete('/', [AdminNewsController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix('admin/faq')->name('admin.faq.')->group(function () {
