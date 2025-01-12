@@ -2,6 +2,7 @@
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\Admin\AdminUsersController;
 use App\Http\Controllers\Admin\AdminNewsController;
 use App\Http\Controllers\Admin\AdminFAQController;
@@ -65,6 +66,10 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('admin/users')->name('admin.users.')->group(function () {
         Route::get('/', [AdminUsersController::class, 'index'])->name('index');
+        Route::get('/{user}/edit', [AdminUsersController::class, 'edit'])->name('edit'); 
+        Route::patch('/{user}', [AdminUsersController::class, 'update'])->name('update'); 
+        Route::delete('/{user}', [AdminUsersController::class, 'destroy'])->name('destroy');
+        Route::post('/', [AdminUsersController::class, 'store'])->name('store');
     });
 
     Route::prefix('admin/news')->name('admin.news.')->group(function () {
