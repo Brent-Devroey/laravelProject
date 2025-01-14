@@ -1,3 +1,4 @@
+@auth
 <x-app-layout>
     @section('title', 'Binder - Your Library')
     <div class="max-w-4xl mx-auto p-6">
@@ -36,9 +37,34 @@
             @else
                 <p class="text-gray-600 text-center">You don't have any books in your library yet. Start adding some!</p>
             @endif
-        @else
-            <!-- Show placeholder for guests -->
-            <p class="text-gray-600 text-center">Please login to see your library.</p>
         @endauth
     </div>
 </x-app-layout>
+@endauth
+
+@guest
+<x-guest-layout>
+    @section('title', 'Welcome to Binder')
+    <div class="max-w-4xl mx-auto p-6 text-center">
+        <h1 class="text-5xl font-extrabold text-gray-800 mb-6">Welcome to <span class="text-blue-600">Binder</span></h1>
+        <p class="text-xl text-gray-600 mb-8">
+            Your go-to platform to discover, rate, and organize books you love. 
+            Create your personal library and share your thoughts with the world.
+        </p>
+        <div class="grid lg:grid-cols-3 gap-6 text-left">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Discover New Books</h2>
+                <p class="text-gray-600">Search through a vast collection of books and find your next great read.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Rate & Review</h2>
+                <p class="text-gray-600">Share your opinions by rating and reviewing the books you’ve read.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Build Your Library</h2>
+                <p class="text-gray-600">Organize your favorite books and showcase them in your personal library.</p>
+            </div>
+        </div>
+    </div>
+</x-guest-layout>
+@endguest

@@ -7,6 +7,6 @@
     <h1>Contact Form Submission</h1>
     <p>Name: {{ $name }}</p>
     <p>Email: {{ $email }}</p>
-    <p>Message: {$message}</p>
+    <p>Message: {{ $userMessage }}</p>
 </body>
 </html>

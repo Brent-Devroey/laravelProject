@@ -14,17 +14,21 @@ class ContactController extends Controller
         return view('contact');
     }
 
-    public function submitForm(Request $request){
+    public function submitForm(Request $request)
+    {
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email',
             'message' => 'required|string',
         ]);
-        $data = $request->only(['name', 'email', 'message']);
-
-        Mail::send('emails.contact', $data, function($mail) use ($data){
+        
+        Mail::send('emails.contact', [
+            'name' => $request->name,
+            'email' => $request->email,
+            'userMessage' => $request->message,
+        ], function ($mail) {
             $mail->to('admin@gmail.com')
-                    ->subject('Contact form submitted');
+                 ->subject('Contact form submitted');
         });
         return back()->with('success', 'Thanks for contacting us!');
     }

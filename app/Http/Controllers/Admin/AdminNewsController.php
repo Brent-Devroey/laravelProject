@@ -35,20 +35,36 @@ class AdminNewsController extends Controller
         return redirect()->route('admin.news.index')->with('success', 'News item created successfully.');
     }
 
-    public function destroy(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|string|max:255',
-        ]);
+    public function update(Request $request, News $news)
+{
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'content' => 'required',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
 
-        $newsItem = News::where('title', $request->title)->first();
-
-        if ($newsItem) {
-            Storage::delete(str_replace('/storage', 'public', $newsItem->image));
-            $newsItem->delete();
-            return redirect()->route('admin.news.index')->with('success', 'News item deleted successfully.');
-        } else {
-            return redirect()->route('admin.news.index')->with('error', 'News item not found.');
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('images', 'public');
+        if ($news->image) {
+            Storage::delete('public/' . $news->image);
         }
+        $news->image = $imagePath;
     }
+
+    // Update the rest of the fields
+    $news->update($request->only('title', 'content'));
+
+    return redirect()->route('admin.news.index')->with('success', 'News item updated successfully.');
+}
+
+public function destroy(News $news)
+{
+    if ($news->image) {
+        Storage::delete('public/' . $news->image);
+    }
+
+    $news->delete();
+
+    return redirect()->route('admin.news.index')->with('success', 'News item deleted successfully.');
+}
 }

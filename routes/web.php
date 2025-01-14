@@ -24,9 +24,7 @@ Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 Route::get('/contact', [ContactController::class, 'showForm'])->name('contact.form');
 Route::post('/contact', [ContactController::class, 'submitForm'])->name('contact.submit');
 
-Route::get('/news', function(){
-    return view('news');
-})->name('news');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -78,7 +76,8 @@ Route::middleware('auth')->group(function () {
     Route::prefix('admin/news')->name('admin.news.')->group(function () {
         Route::get('/', [AdminNewsController::class, 'index'])->name('index');
         Route::post('/', [AdminNewsController::class, 'store'])->name('store');
-        Route::delete('/', [AdminNewsController::class, 'destroy'])->name('destroy');
+        Route::delete('/{news}', [AdminNewsController::class, 'destroy'])->name('destroy');
+        Route::put('/{news}', [AdminNewsController::class, 'update'])->name('update');
     });
 
     Route::prefix('admin/faq')->name('admin.faq.')->group(function () {

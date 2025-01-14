@@ -1,5 +1,8 @@
 <nav class="bg-gray-800 p-4">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <a href="{{ route('home') }}" class="text-white text-2xl font-bold tracking-wide">
+            <h1>Binder</h1>
+        </a>
         <ul class="flex justify-between space-x-4 text-white">
             <li class="px-2"><a href="{{ route('home') }}" class="hover:text-gray-300">Home</a></li>
             <li class="px-2"><a href="{{ route('faq') }}" class="hover:text-gray-300">FAQ</a></li>
