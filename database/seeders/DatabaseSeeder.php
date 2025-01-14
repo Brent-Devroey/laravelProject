@@ -17,7 +17,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             BookSeeder::class,
             AdminUserSeeder::class,
-            NewsSeeder::class
+            NewsSeeder::class,
+            CategorySeeder::class,
+            FaqSeeder::class,
         ]);
     }
 }

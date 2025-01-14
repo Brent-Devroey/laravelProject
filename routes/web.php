@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AdminNewsController;
 use App\Http\Controllers\Admin\AdminFAQController;
 use App\Http\Controllers\Admin\AdminContactController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\FaqController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -17,9 +18,8 @@ Route::get('/', [BookController::class, 'index'])->name('home');
 
 
 
-Route::get('/FAQ', function(){
-    return view('faq');
-})->name('faq');
+Route::get('/faq', [FaqController::class, 'index'])->name('faq');
+
 
 Route::get('/contact', [ContactController::class, 'showForm'])->name('contact.form');
 Route::post('/contact', [ContactController::class, 'submitForm'])->name('contact.submit');
@@ -82,7 +82,10 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('admin/faq')->name('admin.faq.')->group(function () {
-        Route::get('/', [AdminFAQController::class, 'index'])->name('index');
+        Route::get('/', [AdminFaqController::class, 'index'])->name('index');
+        Route::post('/', [AdminFaqController::class, 'store'])->name('store');
+        Route::put('/{id}', [AdminFaqController::class, 'update'])->name('update');
+        Route::delete('/{id}', [AdminFaqController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix('admin/contacts')->name('admin.contacts.')->group(function () {
