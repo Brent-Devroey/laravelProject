@@ -27,11 +27,6 @@
                 </a>
             </div>
 
-            <!-- Contacts Management Button -->
-            <div class="bg-gray-800 text-white text-center p-6 rounded-lg shadow-lg hover:bg-gray-700 transition">
-                <a href="{{ route('admin.contacts.index') }}" class="text-xl font-semibold">
-                    Manage Contacts
-                </a>
             </div>
         </div>
     </div>
