@@ -1,66 +1,148 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+---
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Installation
 
-## About Laravel
+Follow these steps for a smooth setup of the Laravel project.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Requirements
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Ensure the following are installed on your system:
+1. **WSL** (Windows Subsystem for Linux)  
+2. **Composer**  
+3. **MySQL**  
+4. **PHP Laravel**  
+5. **Git**  
+6. **Node.js**  
+7. **Mailtrap**  
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Installation Guide
 
-## Learning Laravel
+### Clone the Repository
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Use the following command to clone the repository:  
+```bash
+git clone https://github.com/Brent-Devroey/laravelProject.git
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Set Up the `.env` File
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. Copy the `.env.example` file and rename it to `.env`.  
+2. Configure the following sections in the `.env` file:
 
-## Laravel Sponsors
+#### Database Configuration
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=project
+DB_USERNAME=root
+DB_PASSWORD=[Your Password]
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+#### Mailtrap Configuration
+```env
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=[Your Mailtrap Username]
+MAIL_PASSWORD=[Your Mailtrap Password]
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="example@gmail.com"
+MAIL_FROM_NAME="${APP_NAME}"
+```
 
-### Premium Partners
+3. Generate the application key by running:  
+```bash
+php artisan key:generate
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### Install Dependencies
 
-## Contributing
+Install the required dependencies for PHP and JavaScript:  
+```bash
+# For PHP
+composer install
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# For JavaScript
+npm install
+```
 
-## Code of Conduct
+### Set Up the Database
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1. Log in to MySQL using the following command:  
+   ```bash
+   mysql -u root -p
+   ```
+2. Create the database:  
+   ```sql
+   CREATE DATABASE project;
+   ```
+3. Exit MySQL:  
+   ```bash
+   exit;
+   ```
 
-## Security Vulnerabilities
+### Run Migrations and Seeders
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Run the following command to set up the database tables and seed initial data:  
+```bash
+php artisan migrate:fresh --seed
+```
 
-## License
+### Set Up the Storage Link
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Create a symbolic link to the storage folder:  
+```bash
+php artisan storage:link
+```
+### Start the project
+Start the development server:
+```bash
+ php artisan serve
+```
+### Images
+
+Since the images are listed in `.gitignore`, you'll need to download them manually:  
+[Download Images](https://drive.google.com/drive/folders/1laQBAzyJUr9XUsuemsHtXXvl7IvJ-kNO?usp=sharing)
+
+Place the images in the following folders:  
+- `public/storage/`  
+- `storage/app/public/`
+
+---
+
+# Features
+
+### Users
+- Store books in your library and rate them.  
+- Search for users via the search bar.  
+- View a user’s most recently added book.  
+- View news articles.  
+- Access the FAQ.  
+- Contact the admin via the contact page.  
+- Delete books from your library.  
+- Edit your profile.
+
+### Admins
+- Access the admin dashboard.  
+- Manage users.  
+- Manage news articles.  
+- Manage the FAQ.  
+- Respond to contact forms via email.
+
+---
+
+# Sources
+
+Here are the resources used during development:
+
+- **Fixing Pivot Table for FAQ and Categories**: [ChatGPT Resource](https://chatgpt.com/share/67885fd4-0fa8-800f-8f3b-f5d9790c4873)  
+- **Images in Layout**: [ChatGPT Resource](https://chatgpt.com/share/67886039-1b60-800f-865c-2d560672ac15)  
+- **Design Issues**: [ChatGPT Resource](https://chatgpt.com/share/67886088-4460-800f-a333-8d5b58296647)  
+- **Navbar Search**: [ChatGPT Resource](https://chatgpt.com/share/678860a9-d350-800f-87a5-89ea3d719603)  
+- **Route Definition Fix**: [ChatGPT Resource](https://chatgpt.com/share/678860cd-e754-800f-89cc-e5d43b52e85a)  
+- **Fixing Email Variable**: [ChatGPT Resource](https://chatgpt.com/share/67886136-a500-800f-9866-c04ac063f944)  
+- **Show Recent Book**: [ChatGPT Resource](https://chatgpt.com/share/67886170-3178-800f-a240-53e0f0ed90c5)
+
+---
+
